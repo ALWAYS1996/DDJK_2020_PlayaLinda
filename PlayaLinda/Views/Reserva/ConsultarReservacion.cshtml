@@ -13,13 +13,23 @@
 
                 @foreach (var dato in Model)
                 {
+                    <hr style="color: #47748b">
+                    <p><center><strong>Detalles de Reservación</strong></center></p>
+                    <hr style="color: #47748b">
+                    <ul>
 
-                    <p class="text-justify">Código de Reservación: @dato.codigoReservacion</p>
-                    <p class="text-justify">Número de Habitación:@dato.codigoHabitacion</p>
-                    <p class="text-justify">Pasaporte Cliente:@dato.codigoCliente</p>
-                    <p class="text-justify">Fecha Llegada: @dato.fechaL</p>
-                    <p class="text-justify">Fecha Salida: @dato.fechaS</p>
-
+                        <li>   <p class="text-justify">Código de Reservación: @dato.codigoReservacion</p></li>
+                        <li>   <p class="text-justify">Número de Habitación:@dato.codigoHabitacion</p></li>
+                        <li>
+                            <p class="text-justify">Pasaporte Cliente:@dato.codigoCliente</p>
+                        </li>
+                        <li>
+                            <p class="text-justify">Fecha Llegada: @dato.fechaL</p>
+                        </li>
+                        <li>
+                            <p class="text-justify">Fecha Salida: @dato.fechaS</p>
+                        </li>
+                    </ul>
 
 
 
