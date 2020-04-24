@@ -9,14 +9,17 @@ namespace PlayaLinda.Controllers
 {
     public class ReservaController : Controller
     {
+
+        NEGOCIO.ReservacionCapaNegocios reservacionCapaNegocios = new NEGOCIO.ReservacionCapaNegocios();
+        NEGOCIO.HabitacionCapaNegocio HabitacionesCapaNegocio = new NEGOCIO.HabitacionCapaNegocio();
         // GET: Reserva
+
         public ActionResult ReservaLinea(Reservacion reservacion) {
 
             ViewBag.mensaje = "Habitación disponible para ser reservada"+ reservacion.codigoHabitacion;
             return View();
         }
-        NEGOCIO.ReservacionCapaNegocios reservacionCapaNegocios = new NEGOCIO.ReservacionCapaNegocios();
-        NEGOCIO.HabitacionCapaNegocio HabitacionesCapaNegocio = new NEGOCIO.HabitacionCapaNegocio();
+        
 
         public ActionResult Reservar()
         {
@@ -30,7 +33,9 @@ namespace PlayaLinda.Controllers
             {
                 ViewBag.mensaje = "Lo sentimos, el rango de fechas que seleccionaste se encuentran ocupadas. En este calendario podrás ver que fechas se encuentran disponibles";
                 return View(reservacionCapaNegocios.sugerirReservacion());
-            } else {
+            }
+            else
+            {
                 ViewData["idHabitacion"] = reservacion.codigoHabitacion;
                 ViewData["fechaInicio"] = reservacion.fechaLlegada;
                 ViewData["fechaFin"] = reservacion.fechaSalida;
@@ -39,12 +44,7 @@ namespace PlayaLinda.Controllers
             }  
         }
 
-
-            }
-
-
-
-        }
+        
         public ActionResult ListaReservaciones()
         {
             return View(reservacionCapaNegocios.listarReservaciones());
