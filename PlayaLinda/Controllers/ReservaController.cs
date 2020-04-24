@@ -75,15 +75,15 @@ namespace PlayaLinda.Controllers
             return Content(mensaje);
         }
 
-        public ActionResult DatosUsuario (Reservacion reservacion)
+        public ActionResult DatosUsuario (string codigoHabitacion ,string fechaLlegada,string fechaSalida)
         {
-            if (reservacionCapaNegocios.verificarReservacion(reservacion) > 0)
+            if (reservacionCapaNegocios.verificarReservacion(new Reservacion(codigoHabitacion, fechaLlegada, fechaSalida)) > 0)
             {
                 ViewBag.mensaje = "Lo sentimos, el rango de fechas que seleccionaste se encuentran ocupadas. En este calendario podrás ver que fechas se encuentran disponibles:";
-                return View(reservacionCapaNegocios.sugerirReservacion());
+                return View("Estado",reservacionCapaNegocios.sugerirReservacion());
             }
-            else
-            {
+            else {
+                Reservacion reservacion = new Reservacion();
                 ViewData["idHabitacion"] = reservacion.codigoHabitacion;
                 ViewData["fechaInicio"] = reservacion.fechaLlegada;
                 ViewData["fechaFin"] = reservacion.fechaSalida;

@@ -52,9 +52,9 @@ namespace DATOS
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("PA_VerificarReservacion", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@fechaLlegada", reservacion.fechaLlegada);
-                cmd.Parameters.AddWithValue("@fechaSalida", reservacion.fechaSalida);
-                cmd.Parameters.AddWithValue("@tipoHabitacion", reservacion.codigoHabitacion);
+                cmd.Parameters.AddWithValue("@fechaLlegada", reservacion.fechaL);
+                cmd.Parameters.AddWithValue("@fechaSalida", reservacion.fechaS);
+                cmd.Parameters.AddWithValue("@tipoHabitacion", reservacion.idHabitacionTemp);
                 
                 SqlDataReader rdr = cmd.ExecuteReader();
                 // while (
@@ -62,6 +62,7 @@ namespace DATOS
                            //{
 
                 cantidad = (rdr.GetInt32(rdr.GetOrdinal("rangoFechas")));
+                string hola = "Hello word";
 
                 //}
             }

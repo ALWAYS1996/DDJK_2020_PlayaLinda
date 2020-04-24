@@ -346,6 +346,8 @@
     <Content Include="Views\Reserva\Estado.cshtml" />
     <Content Include="Views\Reserva\ReservaLinea.cshtml" />
     <Content Include="Views\Reserva\DatosUsuario.cshtml" />
+    <Content Include="Views\Reserva\ConsultarReservacion.cshtml" />
+    <Content Include="Views\Reserva\ListaReservaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ENTIDAD\ENTIDAD.csproj">
