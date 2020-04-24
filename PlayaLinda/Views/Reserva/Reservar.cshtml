@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ENTIDAD.TipoHabitacion>
+@{
+    ViewBag.Title = "Reservar";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="sel1">Tipo Habitación:</label>
+            <select class="form-control" id="sel1" onchange="llenaDatos();">
+                @foreach (var dato in Model)
+                {
+                    <option value="@dato.codigoTipoHabitacion">@dato.nombre</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        @using (Html.BeginForm("DatosUsuario", "Reserva", FormMethod.Post))
+        {
+            <input type="text" id="codigoHabitacion" name="codigoHabitacion" hidden>
+            <input type="text" id="codigoCliente" name="codigoCliente" value="1" hidden>
+            <p>Fecha inicio: <input type="date" id="inicio" name="fechaLlegada"></p>
+            <p>Fecha final: <input type="date" id="final" name="fechaSalida"></p>
+            <button type="submit" name="action">Enviar</button>
+        }
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    function llenaDatos() {
+        var name = document.getElementById("sel1").value;
+        document.getElementById("codigoHabitacion").value = name;
+    }
+</script>

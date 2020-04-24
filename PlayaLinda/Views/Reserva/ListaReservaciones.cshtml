@@ -1,0 +1,44 @@
+﻿@*@{
+    Layout = "~/Views/Shared/Layout_Adm.cshtml";
+}*@
+@model IEnumerable<ENTIDAD.Reservacion>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+
+<table id="table" class="table">
+    <thead>
+        <tr>
+            <th>Codigo Habitacion</th>
+            <th>Codigo Reservación</th>
+            <th>Codigo Cliente</th>
+            <th>Fecha llegada</th>
+            <th>Fecha salida</th>
+            <th>Opciones</th>
+            <th>Detalle</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var dato in Model)
+        {
+            <tr>
+                <td>@dato.codigoHabitacion</td>
+                <td>@dato.codigoReservacion</td>
+                <td>@dato.codigoCliente</td>
+                <td>@dato.fechaL</td>
+                <td>@dato.fechaS</td>
+                <td><a href="">Ver detalles</a> <a href="">Eliminar</a></td>
+                <td>
+                    @Html.ActionLink("Detalles", "ConsultarReservacion", new { codigoReservacion = dato.codigoReservacion })
+                </td>
+            </tr>
+
+        }
+
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        $('#table').DataTable();
+    });
+</script>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>

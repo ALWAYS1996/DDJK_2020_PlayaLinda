@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "_LayoutLogin";
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Hotel Playa Linda</title>
+    <link rel="stylesheet" href="~/Content/Bootstrap.css">
+    <link rel="stylesheet" href="~/Content/Site.css">
+    <link rel="icon" type="image/png" href="~/Content/img/hotel.svg" />
+
+
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="~/Content/img/hotel.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            Hotel Playa Linda
+        </a>
+    </nav>
+
+
+
+    @RenderBody()
+
+
+
+    <footer class="page-footer" id="foote" name="foote">
+        <div class="container">
+            <div class="row">
+                <div class="col 12 s3">
+                    <h5 class="white-text" style="background-color:cornflowerblue">Contactenos</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">Administracion Sitio Web</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Oficinas Centrales</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">WhatApps</a></li>
+                    </ul>
+                </div>
+                <div class="col 12  s3">
+                    <h5 class="white-text" style="background-color:cornflowerblue">Navegación</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">Inicio</a></li>
+                        <li><a id="ftextoA4" class="grey-text text-lighten-3" href="#!">Menu Principal</a></li>
+                    </ul>
+
+                </div>
+
+                <div class="col 12  s3">
+                    <h5 class="white-text" style="background-color:cornflowerblue">Redes Sociales</h5>
+                    <ul name="texto">
+                        <li>
+                            <a class="grey-text text-lighten-3" href="#!">Facebook </a>
+                            <i class="material-icons"></i>
+                        </li>
+                        <li>
+                            <a class="grey-text text-lighten-3" href="#!">Twitter </a>
+                            <i class="material-icons"></i>
+                        </li>
+                        <li>
+                            <a class="grey-text text-lighten-3" href="#!">Instagram </a>
+                            <i class="material-icons"></i>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div id="ftextoA15" class="container">
+                © 2020 Hotel Playa Linda
+                <a class="grey-text text-lighten-4 right" id="ftextoA13" href="#!">Más Información</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="~/Scripts/JQuery.js"></script>
+    <script src="~/Scripts/Popper.js"></script>
+    <script src="~/Scripts/Bootstrap.js"></script>
+
+</body>
+</html>
+
+
+
+

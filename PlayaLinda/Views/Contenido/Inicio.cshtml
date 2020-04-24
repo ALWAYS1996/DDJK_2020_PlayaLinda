@@ -1,0 +1,80 @@
+﻿@model IEnumerable<ENTIDAD.Contenido>
+@{
+    var contenido = (IEnumerable<ENTIDAD.Contenido>)ViewData["contenidoVista"];
+    var listadoPromociones = (IEnumerable<ENTIDAD.Promocion>)ViewData["listadoPromociones"];
+    ViewBag.Title = "Inicio";
+}
+
+<link href="~/Content/css/estiloVistazoH.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/main.js"></script>
+<body>
+    <div class="container">
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <div class="car" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+                    </ol>
+                    <div id="carouselExampleControls" class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img   src="/Content/img/hotel2.jpg" class="responsive active d-block w-100 max-width: 100%" />
+                            <div class="carousel-caption">
+                                <h2>Promociones!</h2>
+                            </div>
+                            
+
+                        </div>
+                        @foreach (var dato in listadoPromociones)
+                        {
+                        <div class="carousel-item ">
+                            <img src='@Html.DisplayFor(modelItem=> dato.imgUrl)' class="responsive d-block w-100 max-width: 100% height: 200" />
+                            <div class="carousel-caption">
+                                <h3>@Html.DisplayFor(model => dato.precio)% de descuento.</h3>
+                                <p>@Html.DisplayFor(model => dato.informacion)</p>
+                            </div>
+
+                        </div>
+                        }
+                    </div>
+
+
+
+                    <a class="carousel-control-prev prev" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next next" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+
+                @foreach (var dato in contenido)
+                {
+                    <center>  <h3 style="color:black; background-color:cornflowerblue"> @Html.DisplayFor(modelItem => dato.titulo)</h3></center>
+                    <center>  <div style="color:black"> @Html.DisplayFor(modelItem => dato.contenido) </div></center>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+
+
+
+
+
+
+
+

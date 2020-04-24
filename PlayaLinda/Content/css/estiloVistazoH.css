@@ -1,0 +1,32 @@
+
+
+
+.container {
+	width: 1800px;
+	margin: 40px auto;
+	overflow: auto;
+}
+
+.slider-inner{
+	width:1100px;
+	height:600px;
+	position:relative;
+	overflow:hidden;
+	float:left;
+	padding:4px;
+	border:#666 solid 1px;
+}
+
+.slider-inner img{
+	display:none;
+	width: 1100px;
+	height:600px;
+}
+
+.slider-inner img.active{
+	display:inline-block;
+}
+
+.prev, .next {
+    cursor: pointer;
+}

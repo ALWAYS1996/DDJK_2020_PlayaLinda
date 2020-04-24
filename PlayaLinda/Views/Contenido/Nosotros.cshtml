@@ -1,0 +1,91 @@
+﻿<!---------------------------RegistrarGaleriaImagen------------------------------------>
+@*<form action="javascripts:;">
+            <input type="file" id="fileUpload" name="fileUpload">
+            <input type="button" name="btn" id="btn" value="Enviar">
+            <div class="col-md-3" id="alertControl"></div>
+        </form>
+
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+                        $(document).ready(function (){
+
+                        $("#btn").click(function (){
+                            var selectFile = ($("#fileUpload"))[0].files[0];
+                            var dataString = new FormData();
+
+                            dataString.append("fileUpload", selectFile);
+
+                            $.ajax({
+
+                                url: '@Url.Action("RegistrarGaleriaImagenes", "Basic")',
+                                type: 'POST',
+                                data: dataString,
+                                contentType: false,
+                                processData: false,
+                                async: false,
+                                success: function () {
+                                    $("#alertControl").html('<div class="alert alert-success" id="alert">' + 'Exito' + '</div>');
+                                    if (typeof (data.Value) != "undefined") {
+                                        alert(data.Message);
+                                    } else { alert('Imagen Subida con exito'); }
+                                },
+                                error: function (data) {
+                                }
+                            });
+                        });
+
+                    });
+
+    </script>*@
+
+
+<!--------------------------- ------------------------------------>
+@model IEnumerable<ENTIDAD.Imagen>
+
+@{ var contenido = (IEnumerable<ENTIDAD.Contenido>)ViewData["contenidoVista"];
+
+}
+
+
+<link href="~/Content/css/estiloGaleriaImagenes.css" rel="stylesheet" />
+<body class="scroll">
+
+    <div class="container ">
+        <div class="row">
+
+
+            <div class="col-sm-2">  </div>
+            <center>
+                <div class="col-sm-10">
+
+                    @foreach (var dato in contenido)
+                    {
+                        <hr style="color: #47748b">
+                        <center style="background-color:bisque"><strong> @Html.DisplayFor(modelItem => dato.titulo)</strong> </center>
+                        <hr style="color: #47748b">
+                        <br>
+                        <center >          <div style="text-align: justify;">@Html.DisplayFor(modelItem => dato.contenido) </div></center>
+
+                    }
+
+                    <br>
+                    <a href="/Itinerario/Itinerario">
+                        <img src="~/Content/img/calendario.svg" height="30" width="30" />Ver  Itinerario del Hotel
+                    </a>
+                </div>
+            </center>
+        
+        </div>
+            <br>
+            <br>
+        
+           
+            <div class="contenedor-galeria">
+                @foreach (var item in Model)
+                {
+                    <img src="@Html.DisplayFor(modelItem=> item.imgPath)" class="galeria__img" />
+                }
+            </div>
+
+        </div>
+</body>

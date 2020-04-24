@@ -1,0 +1,23 @@
+﻿@model IEnumerable<ENTIDAD.TipoHabitacion>
+@{
+    ViewBag.Title = "Tarifas";
+}
+
+<div class="row">
+    @foreach (var dato in Model)
+    {
+    <div class="col-sm-6">
+        <div class="card" style="width:600px; margin:25px;">
+            <hr style="border-top: 1px solid black;">
+            <img src="@dato.urlImg" class="card-img-top" width="150" height="300" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">@dato.nombre</h5>
+                <p class="card-text">@dato.precio</p>
+                <p class="card-text">@dato.descripcion</p>
+                <hr style="border-top: 1px solid black;">
+            </div>
+            <hr style="border-top: 5px solid black;">
+        </div>
+    </div>
+    }
+</div>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ENTIDAD.Mapa>
+
+@{
+    ViewBag.Title = "Mapa";
+    var contenido = (IEnumerable<ENTIDAD.Contenido>)ViewData["contenidoVista"];
+
+}
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCgTUr-ERjl6vvHqY-9ja0kM9O2a1mVo78"></script>
+<script src="~/Scripts/TrazarRuta.js"></script>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+
+<body>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3"></div>
+            <center>
+                <div class="col-md-7">
+
+                    @foreach (var dato in contenido)
+                    {
+                        <hr style="color: #47748b; ">
+                        <center style="background-color:bisque"><strong style="background-color:white">  @Html.DisplayFor(modelItem => dato.titulo) </strong></center>
+                        <hr style="color: #47748b">
+                        <br>
+
+                        <div style="text-align: justify;"> @Html.DisplayFor(modelItem => dato.contenido) </div>
+                        <br>
+                    }
+
+                </div>
+            </center>
+            <div class="col-md-2">
+                <div class="auto">
+                    <button type="button" id="search" name="search" class="autoclick" onclick="get_my_location()"><img src="~/Content/img/ojo.svg" width="50" height="50" alt="x" />  </button>
+
+                    @foreach (var item in Model)
+                    {
+                        <input type="hidden" placeholder="Latitud Origen" id="my_lat" value="@Html.DisplayFor(modelItem=> item.latitudOrigen)" name="my_lat" />
+                        <input type="hidden" placeholder="Longitud Origen" id="my_lng" value="@Html.DisplayFor(modelItem=> item.longitudOrigen)" name="my_lng" />
+
+                    }
+                </div>
+
+            </div>
+            <br>
+
+           <div class="map" id="map" style="width:70%;height:350px;"> </div> 
+
+
+        </div>
+        <br>
+        <br>
+        <br>
+    </div>
+
+    <script type="text/javascript">
+        start_map();
+    </script>
+
+</body>

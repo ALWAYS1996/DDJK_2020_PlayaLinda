@@ -1,0 +1,31 @@
+﻿<div class="container">
+    <div class="row">
+        <center>
+            <div class="col-sm-12">
+                <div class="alert alert-success">
+                    <strong>Estado:</strong> @ViewBag.mensaje (:
+
+                </div>
+            </div>
+        </center>
+
+        <form>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Tipo Habitacion</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" value="@ViewData["idHabitacion"]">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">FechaInicio</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" value="@ViewData["fechaInicio"]">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">FechaFin</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" value="@ViewData["fechaFin"]">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+</div>

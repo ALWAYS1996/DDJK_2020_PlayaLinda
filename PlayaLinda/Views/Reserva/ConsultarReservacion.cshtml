@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "~/Views/Shared/Layout_Adm.cshtml";
+}
+
+
+@model IEnumerable<ENTIDAD.Reservacion>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4"> </div>
+            <div class="col-md-4">
+
+                @foreach (var dato in Model)
+                {
+
+                    <p class="text-justify">Código de Reservación: @dato.codigoReservacion</p>
+                    <p class="text-justify">Número de Habitación:@dato.codigoHabitacion</p>
+                    <p class="text-justify">Pasaporte Cliente:@dato.codigoCliente</p>
+                    <p class="text-justify">Fecha Llegada: @dato.fechaL</p>
+                    <p class="text-justify">Fecha Salida: @dato.fechaS</p>
+
+
+
+
+                }
+            </div>
+         
+
+            <div class="col-md-4"> </div>
+        </div>
+    </div>

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ENTIDAD.Facilidades>
+@{ var listaTipoHabitacion = (IEnumerable<ENTIDAD.Facilidades>)ViewData["listaTipoHabitaciones"];
+    ViewBag.Title = "Inicio";
+}
+
+
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-6" style="width: 10rem;">
+             
+                    <div class="card" style="width:400px">
+                        <img class="card-img-top" src='@Html.DisplayFor(modelItem => item.urlImg)' alt="Card image">
+                        <div class="card-body">
+                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.nombre) </h4>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.reglas) </p>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.detalles) </p>
+
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                </div>
+                }
+            </div>
+
+
+
+
+
+
+
+
+
+            @*<div class="modal" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                         Modal Header
+                        <div class="modal-header">
+                            <h4 class="modal-title">Modal Heading</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                         Modal body
+                        <div class="modal-body">
+                            <img class="card-img-top" src="~/Content/img/playa1.jpg" alt="Card image">
+                        </div>
+
+                         Modal footer
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>*@
+
+
+
