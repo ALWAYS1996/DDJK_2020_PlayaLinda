@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
+using ENTIDAD;
 
 namespace DATOS
 {
@@ -60,5 +61,31 @@ namespace DATOS
             return listarCliente;
         }//Fin
 
+        public int registrarCliente(Cliente cliente)
+        {
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                conexion.Open();
+                comando.Connection = conexion;
+                comando.CommandText = "exec PA_RegistrarReservacion @idTipoHabitacion,@idCliente,@fechaLlegada,@fechaSalida";
+                comando.Parameters.AddWithValue("@pasaporte", cliente.pasaporte);
+                comando.Parameters.AddWithValue("@nombre", cliente.nombre);
+                comando.Parameters.AddWithValue("@apellido", cliente.apellido1);
+                comando.Parameters.AddWithValue("@correo", cliente.correo);
+                int result = comando.ExecuteNonQuery();
+                if (result == -1)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (Exception) { }
+            finally { conexion.Close(); }
+            return 0;
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace PlayaLinda.Controllers
 
         NEGOCIO.ReservacionCapaNegocios reservacionCapaNegocios = new NEGOCIO.ReservacionCapaNegocios();
         NEGOCIO.HabitacionCapaNegocio HabitacionesCapaNegocio = new NEGOCIO.HabitacionCapaNegocio();
-        // GET: Reserva
+        NEGOCIO.ClienteCapaNegocio clienteCapaNegocio = new NEGOCIO.ClienteCapaNegocio();
 
         public ActionResult ReservaLinea(Reservacion reservacion) {
 
@@ -54,26 +54,6 @@ namespace PlayaLinda.Controllers
 
             return View(reservacionCapaNegocios.consultarReservaciones(new Reservacion(codigoReservacion)));
         }
-            
-        public ActionResult CrearReservacion(Reservacion reservacion)  {
-            string mensaje;
-            if (this.reservacionCapaNegocios.registrarReservacion(reservacion) == 0)
-            {
-                //mensaje de error
-                mensaje = "<script language='javascript' type='text/javascript'>" +
-                     "alert('No agregado');window.location.href=" +
-                     "'Reservar';</script>";
-            }
-            else
-            {
-                mensaje = "<script language='javascript' type='text/javascript'>" +
-                    "alert('agregado');window.location.href=" +
-                    "'Reservar';</script>";
-            }
-            //reservacionCapaNegocios.registrarReservacion(reservacion);
-
-            return Content(mensaje);
-        }
 
         public ActionResult DatosUsuario (string codigoHabitacion ,string fechaLlegada,string fechaSalida)
         {
@@ -90,6 +70,27 @@ namespace PlayaLinda.Controllers
                 ViewBag.mensaje = "Habitación disponible para ser reservada";
                 return View();
             }
+        }
+
+        public ActionResult GenerarReservacion(string idHabitacion, string fechaInicio, string fechaFin, string pasaporte, string nombre, string apellido, string email, string tarjeta)
+        {
+            Reservacion reservacion = new Reservacion();
+            reservacion.codigoHabitacion = Int32.Parse(idHabitacion);
+            reservacion.fechaLlegada = Convert.ToDateTime(fechaInicio);
+            reservacion.fechaSalida = Convert.ToDateTime(fechaFin);
+
+            Cliente cliente = new Cliente();
+            cliente.apellido1 = apellido;
+            cliente.nombre = nombre;
+            cliente.pasaporte = pasaporte;
+            cliente.correo = email;
+            clienteCapaNegocio.registrarCliente(cliente);
+
+            if (reservacionCapaNegocios.registrarReservacion(reservacion) == 1)
+            {
+                return View("Reservado");
+            }
+            return View("Cancelado");
         }
     }
 }
