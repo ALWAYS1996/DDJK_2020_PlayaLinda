@@ -23,7 +23,10 @@ namespace NEGOCIO
         public IEnumerable<ENTIDAD.Reservacion> consultarReservaciones(ENTIDAD.Reservacion reserva)
         { return reservacionCapaDatos.consultarReservaciones(reserva); }
 
-
+        public int eliminarReservacion(Reservacion reservacion)
+        {
+            return reservacionCapaDatos.eliminarReservacion(reservacion);
+        }
     }
 }
 

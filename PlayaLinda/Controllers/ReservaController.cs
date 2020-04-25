@@ -92,5 +92,20 @@ namespace PlayaLinda.Controllers
             }
             return View("Cancelado");
         }
+
+        public ActionResult EliminarReservacion(int reservaid)
+        {
+
+            if (reservacionCapaNegocios.eliminarReservacion(new Reservacion(reservaid)) >= 1)
+            {
+                ViewBag.mensaje = "Eliminado";
+            }
+            else
+            {
+                ViewBag.mensaje = "No Eliminado";
+            }
+            return View("ListaReservaciones", reservacionCapaNegocios.listarReservaciones());
+
+        }
     }
 }

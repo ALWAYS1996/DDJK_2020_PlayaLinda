@@ -1,44 +1,170 @@
 ﻿@*@{
-    Layout = "~/Views/Shared/Layout_Adm.cshtml";
-}*@
+        Layout = "~/Views/Shared/Layout_Adm.cshtml";
+    }*@
 @model IEnumerable<ENTIDAD.Reservacion>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 
-<table id="table" class="table">
-    <thead>
-        <tr>
-            <th>Codigo Habitacion</th>
-            <th>Codigo Reservación</th>
-            <th>Codigo Cliente</th>
-            <th>Fecha llegada</th>
-            <th>Fecha salida</th>
-            <th>Opciones</th>
-            <th>Detalle</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
 
-        @foreach (var dato in Model)
-        {
-            <tr>
-                <td>@dato.codigoHabitacion</td>
-                <td>@dato.codigoReservacion</td>
-                <td>@dato.codigoCliente</td>
-                <td>@dato.fechaL</td>
-                <td>@dato.fechaS</td>
-                <td><a href="">Ver detalles</a> <a href="">Eliminar</a></td>
-                <td>
-                    @Html.ActionLink("Detalles", "ConsultarReservacion", new { codigoReservacion = dato.codigoReservacion })
-                </td>
-            </tr>
+            <table id="table" class="table">
+                <thead>
+                    <tr>
+                        <th>Codigo Habitacion</th>
+                        <th>Codigo Reservación</th>
+                        <th>Codigo Cliente</th>
+                        <th>Fecha llegada</th>
+                        <th>Fecha salida</th>
+                        <th>Opciones</th>
+                        <th>Detalle</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var dato in Model)
+                    {
+                        <tr>
+                            <td>@dato.codigoHabitacion</td>
+                            <td>@dato.codigoReservacion</td>
+                            <td>@dato.codigoCliente</td>
+                            <td>@dato.fechaL</td>
+                            <td>@dato.fechaS</td>
+                            <td>
+                                <button class=" btn btn-danger" type="submit"
+                                        onclick="return  eliminar(  @Html.DisplayFor(modelItem => dato.codigoReservacion))">
+                                    Eliminar
+                                    <span class="glyphicon glyphicon-remove" style="color:white"></span>
+
+                                </button>
+
+                            </td>
+                            <td>
+                                @Html.ActionLink("Detalles", "ConsultarReservacion", new { codigoReservacion = dato.codigoReservacion })
+                            </td>
+                        </tr>
+
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <center>
+                @if (@ViewBag.mensaje == "Eliminado")
+                {
+                    <div class="col-md-12">
+                        <div class="alert alert-warning alert-dismissable" role="alert">
+                            <strong>Exito!</strong> <span class="glyphicon glyphicon-thumbs-up"> </span>Se ha borrado exitosamente el registro seleccionado
+                            <br>
+
+
+                        </div>
+                    </div>
+
+                }
+                @if (@ViewBag.mensaje == "No Eliminado")
+                {
+                    <div class="col-md-12">
+                        <div class="alert alert-danger alert-dismissable" role="alert">
+                            <span class="glyphicon glyphicon-info-sign"> </span>
+                            <strong>Lo sentimos, Libro no eliminado</strong>
+
+                            <br>
+
+                        </div>
+                    </div>
+
+                }
+            </center>
+        </div>
+    </div>
+</div>
+<p>
+
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable();
+        });
+
+        function eliminar(valor) {
+            var clienteid = valor;
+            swal({
+                title: "Estás seguro?",
+                text: "Una vez eliminado este registro, no podrás dar marcha atrás!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        eliminarReserva(clienteid);
+                    } else {
+                        swal("Cancelado", "Dato no Eliminado :)", "error");
+
+
+                    }
+                });
 
         }
+        function ajaxEliminarReserva(reservaid) {
+            $.ajax({
+                url: 'Reserva/EliminarReservacaion',
+                type: 'POST',
+                dataType: 'html',
+                data: "reservaid=" + reservaid,
+                beforeSend: function () {
+                    $("#alertControl").html('<div class="alert alert-success" id="alert"> Procesando... </div>');
+                    window.setTimeout(function () {
+                        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                            $(this).remove();
+                        });
+                    }, 300);
+                }
+            })
+                .done(function (data) {
+                    console.log(data);
+                    $("#alertControl").html('<div class="alert alert-success" id="alert">' + data + '</div>');
 
-    </tbody>
-</table>
-<script>
-    $(document).ready(function () {
-        $('#table').DataTable();
-    });
-</script>
-<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+                    window.setTimeout(function () {
+                        $(".alert").fadeTo(5000000, 0).slideUp(50000000, function () {
+                            $(this).remove();
+                        });
+
+                    }, 3000000000);
+                    // swal("Cancelado", "Dato  Eliminado :)", "error");
+
+                })
+                .fail(function () {
+                    console.log('Error');
+                    swal("Cancelado", "Dato no Eliminado :)", "error");
+                })
+                .always(function () {
+                    console.log("complete");
+                });
+        }
+
+
+
+                function eliminarReserva(reservaid) {
+
+                 var url="@Url.Action("EliminarReservacion", "Reserva" ,new { reservaid = "param-id"})";//"metodoEliminarOficina/"+id;
+
+                    url = url.replace("param-id", reservaid);
+                    location.href = url;
+                        }
+
+
+
+
+    </script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>

@@ -200,5 +200,30 @@ private List<ENTIDAD.Reservacion> consultaReservaciones = new List<ENTIDAD.Reser
             finally { conexion.Close(); }
             return consultaReservaciones;
         }//Fin
+
+
+        public int eliminarReservacion(ENTIDAD.Reservacion reservacion)
+        {
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                conexion.Open();
+                comando.Connection = conexion;
+                comando.CommandText = "exec PA_EliminarReservacion @idReservacion";
+                comando.Parameters.AddWithValue("@idReservacion", reservacion.codigoReservacion);
+                int result = comando.ExecuteNonQuery();
+                if (result == -1)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (Exception) { }
+            finally { conexion.Close(); }
+            return 0;
+        }//fin
     }
 }
